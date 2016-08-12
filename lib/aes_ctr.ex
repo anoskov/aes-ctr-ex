@@ -3,10 +3,10 @@ defmodule AesCtr do
    Returns an AES key.
    Accepts a `key_format` (`:base64`|`:bytes`) to determine type of key to produce.
    ## Examples
-       iex> {:ok, key} = CcsCrypto.generate_aes_key(:aes_128, :bytes)
+       iex> {:ok, key} = AesCtr.generate_aes_key(:aes_128, :bytes)
        iex> assert bit_size(key) == 128
        true
-       iex> {:ok, key} = CcsCrypto.generate_aes_key(:aes_128, :base64)
+       iex> {:ok, key} = AesCtr.generate_aes_key(:aes_128, :base64)
        iex> assert String.length(key) == 24
        true
   """
@@ -25,18 +25,18 @@ defmodule AesCtr do
     @doc """
    Returns a string of random where the length is equal to `integer`.
    ## Examples
-       iex> {:ok, rand_bytes} = CcsCrypto.Utils.rand_bytes(16)
+       iex> {:ok, rand_bytes} = AesCtr.rand_bytes(16)
        iex> assert(byte_size(rand_bytes) == 16)
        true
        iex> assert(bit_size(rand_bytes) == 128)
        true
 
-       iex> {:ok, rand_bytes} = CcsCrypto.Utils.rand_bytes(24)
+       iex> {:ok, rand_bytes} = AesCtr.rand_bytes(24)
        iex> assert(byte_size(rand_bytes) == 24)
        true
        iex> assert(bit_size(rand_bytes) == 192)
        true
-       iex> {:ok, rand_bytes} = CcsCrypto.Utils.rand_bytes(32)
+       iex> {:ok, rand_bytes} = AesCtr.rand_bytes(32)
        iex> assert(byte_size(rand_bytes) == 32)
        true
        iex> assert(bit_size(rand_bytes) == 256)
