@@ -31,4 +31,19 @@ end
 {:ok, key_in_base64} = AesCtr.generate_aes_key(:base64)
 ```
 
-## Configuration
+* Encrypt text:
+
+```elixir
+clear_text = "my-clear-text"
+{:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
+{:ok, cipher} = AesCtr.encrypt(aes_128_key, clear_text)
+```
+
+* Decrypt cipher:
+
+```elixir
+clear_text = "my-clear-text"
+{:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
+{:ok, cipher} = AesCtr.encrypt(clear_text, aes_128_key)
+{:ok, val} = AesCtr.decrypt(cipher, aes_128_key)
+```
