@@ -1,8 +1,7 @@
 defmodule AesCtr do
-    @doc """
+  @doc """
    Returns an AES key.
    Accepts a `key_format` (`:base64`|`:bytes`) to determine type of key to produce.
-   ## Examples
        iex> {:ok, key} = AesCtr.generate_aes_key(:aes_128, :bytes)
        iex> assert bit_size(key) == 128
        true
@@ -23,13 +22,12 @@ defmodule AesCtr do
   end
 
   @doc """
-  Encrypt a `binary` with AES in CTR mode.
-  ## Examples
-    iex> clear_text = "my-clear-text"
-    iex> {:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
-    iex> {:ok, cipher} = AesCtr.encrypt(aes_128_key, clear_text)
-    iex> assert(is_bitstring(cipher_text))
-    true
+    Encrypt a `binary` with AES in CTR mode.
+      iex> clear_text = "my-clear-text"
+      iex> {:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
+      iex> {:ok, cipher} = AesCtr.encrypt(aes_128_key, clear_text)
+      iex> assert(is_bitstring(cipher_text))
+      true
   """
   @spec encrypt(String.t, String.t) :: {atom, binary}
   def encrypt(text, key) do
@@ -42,7 +40,6 @@ defmodule AesCtr do
 
   @doc """
     Returns a clear-text string decrypted with AES in CTR mode.
-    ## Examples
         iex> clear_text = "my-clear-text"
         iex> {:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
         iex> {:ok, cipher} = AesCtr.encrypt(clear_text, aes_128_key)
@@ -62,7 +59,6 @@ defmodule AesCtr do
 
   @doc """
    Returns a string of random where the length is equal to `integer`.
-   ## Examples
        iex> {:ok, rand_bytes} = AesCtr.rand_bytes(16)
        iex> assert(byte_size(rand_bytes) == 16)
        true
