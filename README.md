@@ -10,7 +10,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 
 ```elixir
 def deps do
-  [{:aes_ctr, "~> 0.1.0"]
+  [{:aes_ctr, "~> 0.1.0"}]
 end
 ```
 
