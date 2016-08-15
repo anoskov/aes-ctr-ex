@@ -22,7 +22,45 @@ defmodule AesCtr do
     {:error, "invalid key_format"}
   end
 
-    @doc """
+  @doc """
+  Encrypt a `binary` with AES in CTR mode.
+  ## Examples
+    iex> clear_text = "my-clear-text"
+    iex> {:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
+    iex> {:ok, cipher} = AesCtr.encrypt(aes_128_key, clear_text)
+    iex> assert(is_bitstring(cipher_text))
+    true
+  """
+  @spec encrypt(String.t, String.t) :: {atom, binary}
+  def encrypt(text, key) do
+    iv = :crypto.strong_rand_bytes(16)
+    state = :crypto.stream_init(:aes_ctr, key, iv)
+    {_state, ciphertext} = :crypto.stream_encrypt(state, to_string(text))
+
+    {:ok, iv <> ciphertext}
+  end
+
+  @doc """
+    Returns a clear-text string decrypted with AES in CTR mode.
+    ## Examples
+        iex> clear_text = "my-clear-text"
+        iex> {:ok, aes_128_key} = AesCtr.generate_aes_key(:bytes)
+        iex> {:ok, cipher} = AesCtr.encrypt(clear_text, aes_128_key)
+        iex> {:ok, val} = AesCtr.decrypt(cipher, aes_128_key)
+        iex> assert(val == clear_text)
+        true
+  """
+  @spec decrypt(binary, String.t) :: {atom, String.t}
+  def decrypt(cipher, key) do
+    <<iv::binary-16, ciphertext::binary>> = cipher
+    state = :crypto.stream_init(:aes_ctr, key, iv)
+    {_state, plaintext} = :crypto.stream_decrypt(state, ciphertext)
+
+    {:ok, plaintext}
+  end
+
+
+  @doc """
    Returns a string of random where the length is equal to `integer`.
    ## Examples
        iex> {:ok, rand_bytes} = AesCtr.rand_bytes(16)
