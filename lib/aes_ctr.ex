@@ -2,10 +2,10 @@ defmodule AesCtr do
   @doc """
    Returns an AES key.
    Accepts a `key_format` (`:base64`|`:bytes`) to determine type of key to produce.
-       iex> {:ok, key} = AesCtr.generate_aes_key(:aes_128, :bytes)
+       iex> {:ok, key} = AesCtr.generate_aes_key(:bytes)
        iex> assert bit_size(key) == 128
        true
-       iex> {:ok, key} = AesCtr.generate_aes_key(:aes_128, :base64)
+       iex> {:ok, key} = AesCtr.generate_aes_key(:base64)
        iex> assert String.length(key) == 24
        true
   """
