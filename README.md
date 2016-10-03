@@ -31,6 +31,13 @@ end
 {:ok, key_in_base64} = AesCtr.generate_aes_key(:base64)
 ```
 
+* Generate AES_256 key:
+
+```elixir
+{:ok, key} = AesCtr.generate_aes_key(:bytes, 256)
+{:ok, key_in_base64} = AesCtr.generate_aes_key(:base64, 256)
+```
+
 * Encrypt text:
 
 ```elixir
